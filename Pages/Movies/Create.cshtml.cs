@@ -11,9 +11,9 @@ namespace MovieReviews.Pages.Movies
 {
     public class CreateModel : PageModel
     {
-        private readonly MovieReviews.Models.MovieDbContext _context;
+        private readonly RazorPagesMovieContext _context;
 
-        public CreateModel(MovieReviews.Models.MovieDbContext context)
+        public CreateModel(RazorPagesMovieContext context)
         {
             _context = context;
         }

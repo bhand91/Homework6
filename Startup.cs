@@ -36,6 +36,9 @@ namespace MovieReviews
             services.AddDbContext<MovieDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("MovieContext")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<RazorPagesMovieContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("RazorPagesMovieContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

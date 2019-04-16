@@ -1,4 +1,4 @@
-@page "{searchString?}"
+@page
 @model MovieReviews.Pages.Movies.IndexModel
 
 @{
@@ -10,23 +10,18 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<form>
-    <p>
-        <select asp-for="MovieGenre" asp-items="Model.Genres">
-            <option value="">All</option>
-        </select>
-        Title: <input type="text" asp-for="SearchString" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Title)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Movie[0].Title)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie[0].ReleaseDate)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                    @Html.DisplayNameFor(model => model.Movie[0].ReleaseDate)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movie[0].Genre)
@@ -36,9 +31,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movie[0].Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Reviews)
             </th>
             <th></th>
         </tr>
@@ -60,22 +52,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @{
-                    // For each movie, calculate the Average review score and display it
-                    // Or display N/A. @:text will display text in HTML. or you can use a <span> tag
-                    if (item.Reviews.Count > 0) {
-                        double avg = item.Reviews.Average(r => r.Score);
-                        @Html.DisplayFor(modelItem => avg)
-                    }
-                    else
-                    {
-                        @:N/A
-                        //<span>N/A</span>
-                    }
-                }
-               
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
